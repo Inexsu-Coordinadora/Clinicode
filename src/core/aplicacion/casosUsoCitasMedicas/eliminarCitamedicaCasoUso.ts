@@ -1,4 +1,4 @@
-import { ICitasMedicasRepositorio } from "../../dominio/repository/ICitasMedicasRepositorio";
+import { ICitasMedicasRepositorio } from "../../dominio/repository/ICitasMedicasRepositorio.js";
 
 export const eliminarCitaMedicaCasoUso = (repositorio: ICitasMedicasRepositorio) => {
     return async (idCita: string): Promise<boolean> => {

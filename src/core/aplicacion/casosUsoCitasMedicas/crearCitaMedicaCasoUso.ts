@@ -1,6 +1,6 @@
-import { CitasMedicas } from "../../dominio/entidades/citasMedicas/CitasMedicas";
-import { ICitasMedicas } from "../../dominio/entidades/citasMedicas/ICitasMedicas";
-import { ICitasMedicasRepositorio } from "../../dominio/repository/ICitasMedicasRepositorio";
+import { CitasMedicas } from "../../dominio/entidades/citasMedicas/CitasMedicas.js";
+import { ICitasMedicas } from "../../dominio/entidades/citasMedicas/ICitasMedicas.js";
+import { ICitasMedicasRepositorio } from "../../dominio/repository/ICitasMedicasRepositorio.js";
 
 export const crearCitaMedicaCasoUso = (repositorio: ICitasMedicasRepositorio) => {
     return async (datos: ICitasMedicas) => {

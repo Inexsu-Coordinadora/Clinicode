@@ -1,5 +1,5 @@
-import { ICitasMedicasRepositorio } from "../../dominio/repository/ICitasMedicasRepositorio";
-import { ICitasMedicas } from "../../dominio/entidades/citasMedicas/ICitasMedicas";
+import { ICitasMedicas } from "../../dominio/entidades/citasMedicas/ICitasMedicas.js";
+import { ICitasMedicasRepositorio } from "../../dominio/repository/ICitasMedicasRepositorio.js";
 
 export const actualizarCitaMedicaCasoUso = (repositorio: ICitasMedicasRepositorio) => {
     return async (idCita: string, datos: ICitasMedicas): Promise<ICitasMedicas | null> => {
