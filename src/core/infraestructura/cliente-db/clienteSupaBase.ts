@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { configuracion } from '../../../common/configuracion';
+import { configuracion } from '../../../common/configuracion.js';
 
 const { supabaseUrl, supabaseKey } = configuracion;
 

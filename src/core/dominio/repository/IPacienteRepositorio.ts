@@ -1,4 +1,4 @@
-import { IPaciente } from "../entidades/pacientes/Ipaciente";
+import { IPaciente } from "../entidades/pacientes/Ipaciente.js";
 
 export interface IPacienteRepositorio {
     crearPaciente(datosPaciente: IPaciente): Promise<string>;

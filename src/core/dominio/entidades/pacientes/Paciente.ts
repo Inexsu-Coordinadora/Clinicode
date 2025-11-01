@@ -1,4 +1,4 @@
-import { IPaciente } from "./Ipaciente";
+import { IPaciente } from "./Ipaciente.js";
 
 export class Paciente implements IPaciente {
     tipoDocumento: string;
