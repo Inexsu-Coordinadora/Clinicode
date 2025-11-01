@@ -1,7 +1,8 @@
 import Fastify from 'fastify';
 
-import { consultorioEnrutador } from './consultorioEnrutador.js';
+
 import cors from '@fastify/cors';
+import { consultorioEnrutador } from './rutas/consultorioEnrutador.js';
 
 
 const app = Fastify({ logger: true });

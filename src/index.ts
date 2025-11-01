@@ -1,5 +1,5 @@
 
-import app from './presentacion/rutas/app.js';
+import app from './presentacion/app.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
