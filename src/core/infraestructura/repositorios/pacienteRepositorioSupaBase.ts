@@ -78,6 +78,14 @@ export class PacienteRepositorioSupaBase implements IPacienteRepositorio {
     }
 
     async eliminarPaciente(idPaciente: string): Promise<void> {
+        const { error } = await supabase
+        .from("pacientes")
+        .delete()
+        .eq("id_paciente", idPaciente);
         
+        if (error) {
+            throw new Error("Error al eliminar paciente: " + error.message);
+        }
     }
-}
+
+};

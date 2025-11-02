@@ -3,10 +3,10 @@ import { CrearPaciente } from "../../core/aplicacion/pacienteCasoUso/CrearPacien
 import { ListarPacientes } from "../../core/aplicacion/pacienteCasoUso/ListarPacientes.js";
 import { ObtenerPacientePorId } from "../../core/aplicacion/pacienteCasoUso/ObtenerPacientePorId.js";
 import { ActualizarPaciente } from "../../core/aplicacion/pacienteCasoUso/ActualizarPaciente.js";
+import { EliminarPaciente } from "../../core/aplicacion/pacienteCasoUso/EliminarPaciente.js";
 import { PacienteDTO, CrearPacienteEsquema } from "../../core/infraestructura/esquemas/PacienteEsquema.js";
 import { PacienteRepositorioSupaBase } from "../../core/infraestructura/repositorios/pacienteRepositorioSupaBase.js";
 import { ZodError } from "zod";
-import { IPaciente } from "../../core/dominio/entidades/pacientes/Ipaciente.js";
 
 
 const repo = new PacienteRepositorioSupaBase();
@@ -15,6 +15,7 @@ const crearPacienteCaso = new CrearPaciente(repo);
 const listarPacientesCaso = new ListarPacientes(repo);
 const obtenerPacientePorIdCaso = new ObtenerPacientePorId(repo);
 const actualizarPacienteCaso = new ActualizarPaciente(repo);
+const eliminarPacienteCaso = new EliminarPaciente(repo);
 
 
 export async function crearPacienteControlador(
@@ -89,11 +90,11 @@ export async function obtenerPacientePorIdControlador (
 };
 
 export async function actualizarPacienteControlador(
-  req: FastifyRequest<{ Params: { idPaciente: string }; Body: IPaciente }>, 
+  req: FastifyRequest<{ Params: { idPaciente: string }; Body: PacienteDTO }>, 
   reply: FastifyReply){
     try{
       const { idPaciente} = req.params;
-      const nuevoPaciente = req.body;
+      const nuevoPaciente = CrearPacienteEsquema.parse(req.body);
       const pacienteActualizado = await actualizarPacienteCaso.ejecutar(
         idPaciente,
         nuevoPaciente);
@@ -116,3 +117,22 @@ export async function actualizarPacienteControlador(
       });
     }
   };
+
+  export async function eliminarPacienteControlador (
+    req: FastifyRequest<{Params: {idPaciente: string}}>,
+    reply: FastifyReply) {
+      try {
+        const {idPaciente} = req.params;
+        await eliminarPacienteCaso.ejecutar(idPaciente);
+
+        return reply.code(200).send({
+          mensaje: "Paciente eliminado correctamente",
+          idPaciente: idPaciente
+        });
+      } catch (err){
+        return reply.code(500).send({
+          mensaje: "Error al eliminar el paciente",
+          error: err instanceof Error ? err.message : err
+        });
+      }
+    };
