@@ -1,7 +1,7 @@
 import { IPaciente } from "../../dominio/entidades/pacientes/Ipaciente.js";
 import { IPacienteRepositorio } from "../../dominio/repository/IPacienteRepositorio.js";
 
-export class obtenerPacientePorId {
+export class ObtenerPacientePorId {
     constructor(private readonly repo: IPacienteRepositorio) {}
 
     async ejecutar(idPaciente: string): Promise<IPaciente | null> {

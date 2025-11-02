@@ -54,7 +54,27 @@ export class PacienteRepositorioSupaBase implements IPacienteRepositorio {
     }
 
     async actualizarPaciente(idPaciente: string, datosPaciente: IPaciente): Promise<IPaciente> {
-        return datosPaciente
+        const { data, error } = await supabase
+        .from("pacientes")
+        .update({
+        tipo_documento: datosPaciente.tipoDocumento,
+        numero_documento: datosPaciente.numeroDocumento,
+        nombres: datosPaciente.nombres,
+        apellidos: datosPaciente.apellidos,
+        fecha_nacimiento: datosPaciente.fechaNacimiento,
+        telefono: datosPaciente.telefono,
+        correo: datosPaciente.correo,
+        direccion: datosPaciente.direccion,
+        })
+        .eq("id_paciente", idPaciente) 
+        .select("*") 
+        .single();
+        
+        if (error) {
+            throw new Error("Error al actualizar paciente: " + error.message);
+        }
+        
+        return data as IPaciente;
     }
 
     async eliminarPaciente(idPaciente: string): Promise<void> {

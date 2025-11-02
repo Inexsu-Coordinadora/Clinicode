@@ -1,17 +1,21 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { CrearPaciente } from "../../core/aplicacion/pacienteCasoUso/CrearPaciente.js";
-import { listarPacientes } from "../../core/aplicacion/pacienteCasoUso/ListarPacientes.js";
-import { obtenerPacientePorId } from "../../core/aplicacion/pacienteCasoUso/ObtenerPacientePorId.js";
+import { ListarPacientes } from "../../core/aplicacion/pacienteCasoUso/ListarPacientes.js";
+import { ObtenerPacientePorId } from "../../core/aplicacion/pacienteCasoUso/ObtenerPacientePorId.js";
+import { ActualizarPaciente } from "../../core/aplicacion/pacienteCasoUso/ActualizarPaciente.js";
 import { PacienteDTO, CrearPacienteEsquema } from "../../core/infraestructura/esquemas/PacienteEsquema.js";
 import { PacienteRepositorioSupaBase } from "../../core/infraestructura/repositorios/pacienteRepositorioSupaBase.js";
 import { ZodError } from "zod";
+import { IPaciente } from "../../core/dominio/entidades/pacientes/Ipaciente.js";
 
 
 const repo = new PacienteRepositorioSupaBase();
 
 const crearPacienteCaso = new CrearPaciente(repo);
-const listarPacientesCaso = new listarPacientes(repo);
-const obtenerPacientePorIdCaso = new obtenerPacientePorId(repo)
+const listarPacientesCaso = new ListarPacientes(repo);
+const obtenerPacientePorIdCaso = new ObtenerPacientePorId(repo);
+const actualizarPacienteCaso = new ActualizarPaciente(repo);
+
 
 export async function crearPacienteControlador(
   req: FastifyRequest<{Body: PacienteDTO}>,
@@ -83,3 +87,32 @@ export async function obtenerPacientePorIdControlador (
       });
     }
 };
+
+export async function actualizarPacienteControlador(
+  req: FastifyRequest<{ Params: { idPaciente: string }; Body: IPaciente }>, 
+  reply: FastifyReply){
+    try{
+      const { idPaciente} = req.params;
+      const nuevoPaciente = req.body;
+      const pacienteActualizado = await actualizarPacienteCaso.ejecutar(
+        idPaciente,
+        nuevoPaciente);
+
+        if (!pacienteActualizado) {
+          reply.code(404).send({
+            mensaje: "Paciente no encontrado"
+          });
+        }
+
+        return reply.code(200).send({
+          mensaje: "Paciente actualizado correctamente",
+          pacienteActualizado: pacienteActualizado
+        });
+
+    } catch(err) {
+      return reply.code(500).send({
+        mensaje: "Error al actualizar el paciente",
+        error: err instanceof Error ? err.message : err
+      });
+    }
+  };
