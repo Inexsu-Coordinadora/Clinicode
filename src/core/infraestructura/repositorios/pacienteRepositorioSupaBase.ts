@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 
 
 export class PacienteRepositorioSupaBase implements IPacienteRepositorio {
+    
     async crearPaciente(datosPaciente: PacienteDTO): Promise<string> {
         const { data, error } = await supabase
         .from('pacientes')
@@ -31,9 +32,17 @@ export class PacienteRepositorioSupaBase implements IPacienteRepositorio {
     }
 
     async listarPacientes(limite?: number): Promise<IPaciente[]> {
-        const { data, error } = await supabase.from('pacientes').select('*');
+        let query = supabase.from('pacientes').select('*');
+        
+        if (limite) {
+            query = query.limit(limite);
+        }
+        
+        const { data, error } = await query;
+        
         if (error) throw new Error(error.message);
-        return data as Paciente[];
+        
+        return data as IPaciente[];
     }
 
     async obtenerPacientePorId(idPaciente: string): Promise<IPaciente | null> {
