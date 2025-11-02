@@ -1,8 +1,7 @@
 import { IPacienteRepositorio } from "../../dominio/repository/IPacienteRepositorio.js";
 import { IPaciente } from "../../dominio/entidades/pacientes/Ipaciente.js";
 import { supabase } from "../cliente-db/clienteSupaBase.js";
-import { Paciente } from "../../dominio/entidades/pacientes/Paciente.js";
-import { PacienteDTO } from "../../../presentacion/esquemas/PacienteEsquema.js";
+import { PacienteDTO } from "../esquemas/PacienteEsquema.js";
 import { v4 as uuidv4 } from "uuid";
 
 
@@ -17,7 +16,7 @@ export class PacienteRepositorioSupaBase implements IPacienteRepositorio {
             numero_documento: datosPaciente.numeroDocumento,
             nombres: datosPaciente.nombres,
             apellidos: datosPaciente.apellidos,
-            fecha_nacimiento: datosPaciente.fechaNacimiento, // 👈 aquí el cambio clave
+            fecha_nacimiento: datosPaciente.fechaNacimiento,
             telefono: datosPaciente.telefono,
             correo: datosPaciente.correo,
             direccion: datosPaciente.direccion
@@ -46,7 +45,12 @@ export class PacienteRepositorioSupaBase implements IPacienteRepositorio {
     }
 
     async obtenerPacientePorId(idPaciente: string): Promise<IPaciente | null> {
-        return null
+        const {data, error} = await supabase
+        .from('pacientes').select('*').eq('id_paciente', idPaciente).single();
+        if (error){
+            throw new Error("Error al obtener Paciente" + error.message)
+        }
+        return data;
     }
 
     async actualizarPaciente(idPaciente: string, datosPaciente: IPaciente): Promise<IPaciente> {
