@@ -14,4 +14,18 @@ export class ConsultorioRepositorioSupabase implements IConsultorioRepositorio {
         if (error) throw new Error(error.message);
         return data as Consultorio[];
     }
+
+    async actualizar(id_consultorio: string, datos: any) {
+        const { data, error } = await supabase
+            .from("consultorios")
+            .update(datos)
+            .eq("id_consultorio", id_consultorio)
+            .select();
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return data[0];
+    }
 }
