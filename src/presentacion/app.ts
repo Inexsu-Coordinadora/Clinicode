@@ -1,14 +1,12 @@
 import Fastify from 'fastify';
-
-
 import cors from '@fastify/cors';
-import { consultorioEnrutador } from './rutas/consultorioEnrutador.js';
+import { pacienteEnrutador } from './rutas/pacienteEnrutador.js';
 
 
 const app = Fastify({ logger: true });
 
 app.register(cors);
-app.register(consultorioEnrutador, { prefix: '/consultorios' });
+app.register(pacienteEnrutador, { prefix: '/api' });
 
 app.get('/', async () => {
     return { mensaje: 'Servidor Fastify funcionando' };
