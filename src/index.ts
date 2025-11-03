@@ -16,4 +16,8 @@ const start = async () => {
     }
 };
 
+<<<<<<< HEAD
 start(); 
+=======
+start();
+>>>>>>> developer
