@@ -1,7 +1,6 @@
 import { IMedicosRepositorio } from "../../dominio/repository/IMedicoRepositorio.js";
 import { IMedico } from "../../dominio/entidades/medicos/IMedico.js";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
-
 import 'dotenv/config';
 
 const SUPABASE_URL = process.env.SUPABASE_URL!;
@@ -78,6 +77,17 @@ export class MedicoRepositorio implements IMedicosRepositorio {
   }
 
   async eliminarMedico(idMedico: string): Promise<void> {
+    const { data: citas, error: errorCitas } = await this.supabase
+      .from("citas_medicas")
+      .select("id_cita")
+      .eq("id_medico", idMedico);
+
+    if (errorCitas) throw new Error(errorCitas.message);
+
+    if (citas && citas.length > 0) {
+      throw new Error("No se puede eliminar el médico porque tiene citas asociadas.");
+    }
+
     const { error } = await this.supabase
       .from("medicos")
       .delete()
