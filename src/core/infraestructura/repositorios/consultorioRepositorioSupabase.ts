@@ -3,6 +3,7 @@ import { Consultorio } from "../../dominio/entidades/consultorios/IConsultorio.j
 import { supabase } from "../cliente-db/clienteSupabase.js";
 
 
+
 export class ConsultorioRepositorioSupabase implements IConsultorioRepositorio {
     async crear(consultorio: Consultorio): Promise<void> {
         const { error } = await supabase.from('consultorios').insert([consultorio]);
@@ -28,4 +29,19 @@ export class ConsultorioRepositorioSupabase implements IConsultorioRepositorio {
 
         return data[0];
     }
+
+    async eliminar(id_consultorio: string): Promise<boolean> {
+        const { error } = await supabase
+            .from('consultorios')
+            .delete()
+            .eq('id_consultorio', id_consultorio); 
+
+        if (error) {
+            console.error(error);
+            throw new Error("Error al eliminar el consultorio.");
+        }
+
+        return true;
+    }
+
 }
