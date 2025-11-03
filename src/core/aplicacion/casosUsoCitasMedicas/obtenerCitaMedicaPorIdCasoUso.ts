@@ -1,10 +1,10 @@
 import { ICitasMedicas } from "../../dominio/entidades/citasMedicas/ICitasMedicas.js";
 import { ICitasMedicasRepositorio } from "../../dominio/repository/ICitasMedicasRepositorio.js";
 
+export class ObtenerCitaMedicaPorIdCasoUso {
+    constructor(private repositorio: ICitasMedicasRepositorio) { }
 
-export const obtenerCitaMedicaPorIdCasoUso = (repositorio: ICitasMedicasRepositorio) => {
-    return async (idCita: string): Promise<ICitasMedicas | null> => {
-        const cita = await repositorio.obtenerCitaMedicaPorID(idCita);
-        return cita;
-    };
-};
+    async ejecutar(idCita: string): Promise<ICitasMedicas | null> {
+        return await this.repositorio.obtenerCitaMedicaPorID(idCita);
+    }
+}

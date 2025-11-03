@@ -1,16 +1,18 @@
 import { CitasMedicas } from "../../dominio/entidades/citasMedicas/CitasMedicas.js";
 import { ICitasMedicas } from "../../dominio/entidades/citasMedicas/ICitasMedicas.js";
 import { ICitasMedicasRepositorio } from "../../dominio/repository/ICitasMedicasRepositorio.js";
+export class CrearCitaMedicaCasoUso {
+    constructor(private repositorio: ICitasMedicasRepositorio) { }
 
-export const crearCitaMedicaCasoUso = (repositorio: ICitasMedicasRepositorio) => {
-    return async (datos: ICitasMedicas) => {
+    async ejecutar(datos: ICitasMedicas): Promise<ICitasMedicas> {
         const nuevaCita = new CitasMedicas({
             ...datos,
-            estadoCita: 'pendiente',
+            estadoCita: "Programada",
             creadaEn: new Date().toISOString(),
             actualizadaEn: null,
         });
-        const citaCreada = await repositorio.crearCitaMedica(nuevaCita);
+
+        const citaCreada = await this.repositorio.crearCitaMedica(nuevaCita);
         return citaCreada;
     }
-} 
+}

@@ -2,8 +2,10 @@ import { ICitasMedicas } from "../../dominio/entidades/citasMedicas/ICitasMedica
 import { ICitasMedicasRepositorio } from "../../dominio/repository/ICitasMedicasRepositorio.js";
 
 
-export const obtenerCitasMedicasCasoUso = (repositorio: ICitasMedicasRepositorio) => {
-    return async (): Promise<ICitasMedicas[]> => {
-        return await repositorio.obtenerCitasMedicas();
+export class ObtenerCitasMedicasCasoUso {
+    constructor(private repositorio: ICitasMedicasRepositorio) { }
+
+    async ejecutar(): Promise<ICitasMedicas[]> {
+        return await this.repositorio.obtenerCitasMedicas();
     }
 }
