@@ -1,0 +1,19 @@
+{
+  "name": "Actualizar Consultorio",
+  "type": "http",
+  "request": {
+    "method": "PUT",
+    "url": "http://localhost:3000/consultorios/id_consultorio",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "type": "json",
+      "raw": {
+        "nombre": "Consultorio Renovado",
+        "ubicacion": "Piso 3",
+        "disponible": false
+      }
+    }
+  }
+}

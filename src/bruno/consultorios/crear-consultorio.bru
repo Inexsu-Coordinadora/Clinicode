@@ -1,0 +1,20 @@
+{
+  "name": "Crear Consultorio",
+  "type": "http",
+  "request": {
+    "method": "POST",
+    "url": "http://localhost:3000/consultorios",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "type": "json",
+      "raw": {
+        "id_consultorio": "uuid-o-id",
+        "nombre": "Consultorio 1",
+        "ubicacion": "Piso 2",
+        "disponible": true
+      }
+    }
+  }
+}
