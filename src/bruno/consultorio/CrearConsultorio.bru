@@ -1,0 +1,24 @@
+meta {
+  name: CrearConsultorio
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/api/consultorio
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nombre": "Consultorio 302",
+    "ubicacion": "Piso 3",
+    "disponible": true
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
