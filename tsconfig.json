@@ -33,8 +33,5 @@
     // "noPropertyAccessFromIndexSignature": true,
     // Recommended Options
     "strict": true
-  },
-  "include": [
-    "src"
-  ],
+  }
 }
