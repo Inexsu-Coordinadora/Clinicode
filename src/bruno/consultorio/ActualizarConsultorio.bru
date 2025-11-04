@@ -1,0 +1,25 @@
+meta {
+  name: ActualizarConsultorio
+  type: http
+  seq: 2
+}
+
+put {
+  url: http://localhost:3000/api/consultorio/4240c8ff-d998-48c0-8868-f1a5a4dccfa1
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "id_consultorio": "4240c8ff-d998-48c0-8868-f1a5a4dccfa1",
+    "nombre": "Consultorio 301",
+    "ubicacion": "Piso 3 - Torre B",
+    "disponible": false
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
