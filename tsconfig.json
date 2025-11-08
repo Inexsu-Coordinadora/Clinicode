@@ -9,7 +9,6 @@
     "module": "nodenext",
     "target": "esnext",
     "esModuleInterop": true,
-    "moduleResolution": "nodenext",
     // For nodejs:
     "lib": [
       "esnext"
@@ -34,6 +33,5 @@
     // "noPropertyAccessFromIndexSignature": true,
     // Recommended Options
     "strict": true
-  },
-  "include": ["src"],
+  }
 }

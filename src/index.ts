@@ -1,4 +1,3 @@
-
 import app from './presentacion/app.js';
 import dotenv from 'dotenv';
 
@@ -16,4 +15,4 @@ const start = async () => {
     }
 };
 
-start();
+start(); 
