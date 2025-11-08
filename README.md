@@ -97,6 +97,9 @@ En el siguiente enlace encontrarás la documentación del proyecto:
 
 https://docs.google.com/document/d/1VYBwgj6q2qgskG_6QSNeL9d03RMZmIWy/edit?usp=drive_link&ouid=112543562299618439305&rtpof=true&sd=true
 
+
 ## Pruebas de endpoints
 
 En el siguiente link encontrarás las pruebas de los endpoints con el API Client Bruno:
+
+https://drive.google.com/file/d/1dA59MGxFkHyc21oHpPnG0nf3cpPhxafv/view?usp=drive_link
