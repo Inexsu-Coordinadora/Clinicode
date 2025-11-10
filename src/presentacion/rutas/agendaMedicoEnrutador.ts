@@ -5,9 +5,9 @@ import { FastifyInstance } from "fastify";
 
 export async function agendaMedicoEnrutador (app: FastifyInstance){
     app.get('/agendas-medico',listarAgendaMedicoControlador);
-    app.get('/agendas-medico/:idMedico',obtenerAgendaPorIdControlador);
+    app.get('/agendas-medico/:idAgenda',obtenerAgendaPorIdControlador);
     app.post('/agendas-medico', crearAgendaMedicoControlador);
-    app.put('/agendas-medico/:idMedico',actualizarAgendaMedicoControlador);
-    app.delete('/agendas-medico/:idMedico',eliminarAgendaControlador);
+    app.put('/agendas-medico/:idAgenda',actualizarAgendaMedicoControlador);
+    app.delete('/agendas-medico/:idAgenda',eliminarAgendaControlador);
 };
 

@@ -32,7 +32,6 @@ export class AgendaMedicoRepositorioSupaBase implements IAgendaMedicoRepositorio
         .select("id_agenda")
         .eq("id_medico", datosAgenda.idMedico)
         .eq("id_consultorio", datosAgenda.idConsultorio)
-        .eq("dias_disponibles", datosAgenda.diasDisponibles)
         .eq("hora_inicio", datosAgenda.horaInicio)
         .eq("hora_fin", datosAgenda.horaFin);
         

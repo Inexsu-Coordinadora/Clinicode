@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { CrearAgendaMedico } from "../../core/aplicacion/agendaMedicoCasoUso/CrearAgenda.js";
-import { ListarAgendaMedico } from "../../core/aplicacion/agendaMedicoCasoUso/listarAgendaMedico.js";
+import { ListarAgendaMedico } from "../../core/aplicacion/agendaMedicoCasoUso/ListarAgendaMedico.js";
 import { ObtenerAgendaPorId } from "../../core/aplicacion/agendaMedicoCasoUso/ObtenerAgendaMedicoPorId.js";
 import { ActualizarAgenda } from "../../core/aplicacion/agendaMedicoCasoUso/ActualizarAgenda.js";
 import { EliminarAgenda } from "../../core/aplicacion/agendaMedicoCasoUso/EliminarAgenda.js";
@@ -34,6 +34,10 @@ export async function crearAgendaMedicoControlador (
                     error: err.issues[0]?.message || "Error desconocido",
                 });
             }
+            return reply.code(500).send({
+                mensaje: "Error al crear agenda del médico",
+                error: err instanceof Error ? err.message : String(err)
+            });
         }
     };
 
