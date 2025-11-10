@@ -95,7 +95,7 @@ export async function actualizarAgendaMedicoControlador(
         if (!agendaActualizada) {
             reply.code(404).send({
             mensaje: "Agenda del médico no encontrada"
-          });
+        });
         }
         
         return reply.code(200).send({
